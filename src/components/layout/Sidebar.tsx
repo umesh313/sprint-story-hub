@@ -43,7 +43,7 @@ const Sidebar = () => {
           return <li key={item.path}>
                 <Link to={item.path} className={cn("flex items-center p-2 rounded-md text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors", isActive && "bg-primary/10 text-primary")}>
                   <item.icon className="h-5 w-5" />
-                  <span className="ml-3 hidden lg:block text-base text-left">{item.label}</span>
+                  <span className="ml-3 hidden lg:block text-base text-left mx-[10px]">{item.label}</span>
                 </Link>
               </li>;
         })}

@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import GanttChart from "@/components/analytics/GanttChart";
 import HeatmapChart from "@/components/analytics/HeatmapChart";
@@ -8,10 +7,8 @@ import StatusDistribution from "@/components/dashboard/StatusDistribution";
 import SpendingDistribution from "@/components/dashboard/SpendingDistribution";
 import BudgetOverview from "@/components/dashboard/BudgetOverview";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
 const AnalyticsPage = () => {
-  return (
-    <div className="space-y-6">
+  return <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Analytics</h1>
       </div>
@@ -20,7 +17,7 @@ const AnalyticsPage = () => {
         <CardHeader>
           <CardTitle>Budget Analysis</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-[35px] bg-slate-950">
           <BudgetOverview projects={mockProjects} />
         </CardContent>
       </Card>
@@ -86,8 +83,6 @@ const AnalyticsPage = () => {
           <GanttChart tasks={mockTasks} />
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>;
 };
-
 export default AnalyticsPage;
