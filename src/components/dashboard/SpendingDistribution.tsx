@@ -27,8 +27,8 @@ const SpendingDistribution = ({
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     const name = data[index].name;
-    const truncatedName = name.length > 15 
-      ? `${name.slice(0, 12)}...` 
+    const truncatedName = name.length > 12 
+      ? `${name.slice(0, 10)}...` 
       : name;
 
     return (
@@ -52,15 +52,15 @@ const SpendingDistribution = ({
         <CardTitle className="text-lg text-center">Spending Distribution</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[250px]">
+        <div className="h-[280px]">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie 
                 data={data} 
                 cx="50%" 
                 cy="50%" 
-                innerRadius={60} 
-                outerRadius={80} 
+                innerRadius={70} 
+                outerRadius={100} 
                 paddingAngle={5} 
                 dataKey="value" 
                 label={renderCustomizedLabel}

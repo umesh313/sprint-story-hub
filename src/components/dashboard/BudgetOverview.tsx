@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from "recharts";
@@ -5,9 +6,11 @@ import { DollarSign } from "lucide-react";
 import { Project } from "@/types";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { useIsMobile } from "@/hooks/use-mobile";
+
 interface BudgetOverviewProps {
   projects: Project[];
 }
+
 const BudgetOverview = ({
   projects
 }: BudgetOverviewProps) => {
@@ -64,7 +67,9 @@ const BudgetOverview = ({
       }
     }
   };
-  return <Card className="lg:col-span-2">
+
+  return (
+    <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-lg">Budget Overview</CardTitle>
         <div className="flex items-center space-x-2">
@@ -76,7 +81,7 @@ const BudgetOverview = ({
           </button>
         </div>
       </CardHeader>
-      <CardContent className="px-[5px] py-[5px] my-[30px] mx-[30px]">
+      <CardContent className="px-[5px] py-[5px] my-[20px] mx-[20px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div className="bg-muted/30 p-4 rounded-lg">
             <div className="flex items-center gap-1 text-sm font-medium mb-2">
@@ -104,9 +109,10 @@ const BudgetOverview = ({
           </div>
         </div>
         
-        <div className={`h-[${isMobile ? '200px' : '250px'}] w-full`}>
+        <div className="h-[220px] w-full">
           <ChartContainer config={chartConfig}>
-            {chartView === 'line' ? <LineChart data={spendingData}>
+            {chartView === 'line' ? (
+              <LineChart data={spendingData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="month" />
                 <YAxis tickFormatter={value => `$${value / 1000}k`} />
@@ -134,7 +140,9 @@ const BudgetOverview = ({
               r: 6,
               strokeWidth: 2
             }} />
-              </LineChart> : <AreaChart data={spendingData}>
+              </LineChart>
+            ) : (
+              <AreaChart data={spendingData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="month" />
                 <YAxis tickFormatter={value => `$${value / 1000}k`} />
@@ -150,10 +158,13 @@ const BudgetOverview = ({
                 <Legend />
                 <Area type="monotone" dataKey="planned" stackId="1" strokeWidth={2} fillOpacity={0.3} />
                 <Area type="monotone" dataKey="actual" stackId="2" strokeWidth={2} fillOpacity={0.3} />
-              </AreaChart>}
+              </AreaChart>
+            )}
           </ChartContainer>
         </div>
       </CardContent>
-    </Card>;
+    </Card>
+  );
 };
+
 export default BudgetOverview;
