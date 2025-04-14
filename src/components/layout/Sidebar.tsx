@@ -1,22 +1,34 @@
-
 import { BarChart, Calendar, ChartGantt, FolderKanban, Home, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
-
-const navItems = [
-  { icon: Home, label: "Dashboard", path: "/" },
-  { icon: FolderKanban, label: "Kanban Board", path: "/kanban" },
-  { icon: Calendar, label: "Calendar", path: "/calendar" },
-  { icon: ChartGantt, label: "Timeline", path: "/timeline" },
-  { icon: BarChart, label: "Analytics", path: "/analytics" },
-  { icon: Settings, label: "Settings", path: "/settings" },
-];
-
+const navItems = [{
+  icon: Home,
+  label: "Dashboard",
+  path: "/"
+}, {
+  icon: FolderKanban,
+  label: "Kanban Board",
+  path: "/kanban"
+}, {
+  icon: Calendar,
+  label: "Calendar",
+  path: "/calendar"
+}, {
+  icon: ChartGantt,
+  label: "Timeline",
+  path: "/timeline"
+}, {
+  icon: BarChart,
+  label: "Analytics",
+  path: "/analytics"
+}, {
+  icon: Settings,
+  label: "Settings",
+  path: "/settings"
+}];
 const Sidebar = () => {
   const location = useLocation();
-  
-  return (
-    <aside className="bg-sidebar w-16 lg:w-64 border-r border-sidebar-border flex flex-col h-screen fixed left-0 top-0">
+  return <aside className="bg-sidebar w-16 lg:w-64 border-r border-sidebar-border flex flex-col h-screen fixed left-0 top-0">
       <div className="p-4 border-b border-sidebar-border flex justify-center lg:justify-start items-center">
         <div className="h-8 w-8 bg-primary rounded-md flex items-center justify-center">
           <span className="text-white font-bold text-lg">PM</span>
@@ -26,24 +38,15 @@ const Sidebar = () => {
       
       <nav className="mt-6 px-2 flex-1">
         <ul className="space-y-2">
-          {navItems.map((item) => {
-            const isActive = location.pathname === item.path;
-            
-            return (
-              <li key={item.path}>
-                <Link 
-                  to={item.path}
-                  className={cn(
-                    "flex items-center p-2 rounded-md text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors",
-                    isActive && "bg-primary/10 text-primary"
-                  )}
-                >
+          {navItems.map(item => {
+          const isActive = location.pathname === item.path;
+          return <li key={item.path}>
+                <Link to={item.path} className={cn("flex items-center p-2 rounded-md text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors", isActive && "bg-primary/10 text-primary")}>
                   <item.icon className="h-5 w-5" />
-                  <span className="ml-3 hidden lg:block">{item.label}</span>
+                  <span className="ml-3 hidden lg:block text-base text-left">{item.label}</span>
                 </Link>
-              </li>
-            );
-          })}
+              </li>;
+        })}
         </ul>
       </nav>
       
@@ -58,8 +61,6 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-    </aside>
-  );
+    </aside>;
 };
-
 export default Sidebar;
