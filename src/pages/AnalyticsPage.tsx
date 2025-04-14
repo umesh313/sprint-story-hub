@@ -17,7 +17,7 @@ const AnalyticsPage = () => {
         <CardHeader>
           <CardTitle>Budget Analysis</CardTitle>
         </CardHeader>
-        <CardContent className="px-[35px] bg-slate-950">
+        <CardContent className="bg-slate-950 px-[31px] my-[18px] py-[2px] mx-[10px]">
           <BudgetOverview projects={mockProjects} />
         </CardContent>
       </Card>
