@@ -76,7 +76,7 @@ const BudgetOverview = ({
           </button>
         </div>
       </CardHeader>
-      <CardContent className="px-[100px] py-[51px] my-[61px] mx-[66px]">
+      <CardContent className="px-[10px] py-[10px] my-[20px] mx-[20px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div className="bg-muted/30 p-4 rounded-lg">
             <div className="flex items-center gap-1 text-sm font-medium mb-2">
