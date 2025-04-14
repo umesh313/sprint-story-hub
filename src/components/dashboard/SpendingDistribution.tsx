@@ -34,7 +34,7 @@ const SpendingDistribution = ({
         {`${truncatedName}: ${(percent * 100).toFixed(0)}%`}
       </text>;
   };
-  return <Card className="h-full">
+  return <Card className="h-full mx-0 my-[15px] py-0 px-[15px]">
       <CardHeader className="my-[14px]">
         <CardTitle className="text-lg text-center">Spending Distribution</CardTitle>
       </CardHeader>
