@@ -16,6 +16,7 @@ import {
 import { DollarSign } from "lucide-react";
 import { Project } from "@/types";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface BudgetOverviewProps {
   projects: Project[];
@@ -23,6 +24,7 @@ interface BudgetOverviewProps {
 
 const BudgetOverview = ({ projects }: BudgetOverviewProps) => {
   const [chartView, setChartView] = useState<'line' | 'area'>('area');
+  const isMobile = useIsMobile();
 
   // Calculate total budget, spent, and remaining
   const totalBudget = projects.reduce((acc, project) => acc + project.budget, 0);
@@ -59,7 +61,7 @@ const BudgetOverview = ({ projects }: BudgetOverviewProps) => {
   };
 
   return (
-    <Card className="col-span-2">
+    <Card className="lg:col-span-2">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-lg">Budget Overview</CardTitle>
         <div className="flex items-center space-x-2">
@@ -105,7 +107,7 @@ const BudgetOverview = ({ projects }: BudgetOverviewProps) => {
           </div>
         </div>
         
-        <div className="h-[300px] w-full">
+        <div className={`h-[${isMobile ? '200px' : '250px'}] w-full`}>
           <ChartContainer config={chartConfig}>
             {chartView === 'line' ? (
               <LineChart data={spendingData}>

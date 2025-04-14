@@ -64,10 +64,11 @@ const DashboardPage = () => {
         />
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Modified the grid layout for better responsiveness */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <BudgetOverview projects={mockProjects} />
         
-        <div className="space-y-6">
+        <div className="lg:col-span-1 space-y-6">
           <SpendingDistribution projects={mockProjects} />
           <StatusDistribution tasks={mockTasks} />
         </div>
