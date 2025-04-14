@@ -64,7 +64,7 @@ const BudgetOverview = ({
       }
     }
   };
-  return <Card className="rounded-sm my-[24px] mx-[29px] px-[41px] py-[50px]">
+  return <Card className="rounded-sm py-[26px] my-[11px] px-[27px] mx-[20px]">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-lg">Budget Overview</CardTitle>
         <div className="flex items-center space-x-2">
@@ -76,7 +76,7 @@ const BudgetOverview = ({
           </button>
         </div>
       </CardHeader>
-      <CardContent className="py-[10px] px-[31px] mx-[51px] my-[45px]">
+      <CardContent className="px-[100px] py-[51px] my-[61px] mx-[66px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div className="bg-muted/30 p-4 rounded-lg">
             <div className="flex items-center gap-1 text-sm font-medium mb-2">
