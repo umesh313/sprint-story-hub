@@ -19,7 +19,7 @@ const KanbanBoard = () => {
     setActiveTask(task);
   };
 
-  const handleDragOver = (e: React.DragOverEvent, columnId: string) => {
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>, columnId: string) => {
     e.preventDefault();
   };
 

@@ -1,5 +1,4 @@
-
-import { Column, Project, Task, User } from "../types";
+import { Column, Priority, Project, Status, Task, User } from "@/types";
 
 export const users: User[] = [
   {
@@ -133,24 +132,29 @@ export const mockProjects: Project[] = [
   {
     id: "project-1",
     name: "Website Redesign",
-    tasks: mockTasks.slice(0, 4),
-    progress: 25,
+    tasks: mockTasks.filter(task => task.id.startsWith("task-1")),
+    progress: 75,
+    budget: 25000,
+    costSpent: 19500
   },
   {
     id: "project-2",
     name: "Mobile App Development",
-    tasks: mockTasks.slice(4, 7),
-    progress: 60,
+    tasks: mockTasks.filter(task => task.id.startsWith("task-2")),
+    progress: 40,
+    budget: 50000,
+    costSpent: 22500
   },
   {
     id: "project-3",
     name: "Marketing Campaign",
-    tasks: mockTasks.slice(7, 10),
-    progress: 80,
-  },
+    tasks: mockTasks.filter(task => task.id.startsWith("task-3")),
+    progress: 90,
+    budget: 15000,
+    costSpent: 14200
+  }
 ];
 
-// Utility function to group tasks by status
 export const getTasksByStatus = (tasks: Task[]) => {
   return tasks.reduce((acc, task) => {
     if (!acc[task.status]) {
@@ -161,7 +165,6 @@ export const getTasksByStatus = (tasks: Task[]) => {
   }, {} as Record<Status, Task[]>);
 };
 
-// Calculate days until deadline
 export const getDaysUntilDeadline = (deadline: string) => {
   const today = new Date();
   const deadlineDate = new Date(deadline);
@@ -170,7 +173,6 @@ export const getDaysUntilDeadline = (deadline: string) => {
   return diffDays;
 };
 
-// Get deadline status (overdue, approaching, future)
 export const getDeadlineStatus = (deadline: string) => {
   const daysUntil = getDaysUntilDeadline(deadline);
   if (daysUntil < 0) return "overdue";

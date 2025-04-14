@@ -1,5 +1,5 @@
 
-import { Activity, Calendar, CheckCircle, Clock, FileText } from "lucide-react";
+import { Activity, Calendar, CheckCircle, Clock, DollarSign, FileText } from "lucide-react";
 import StatsCard from "@/components/dashboard/StatsCard";
 import { mockProjects, mockTasks } from "@/data/mockData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +8,8 @@ import ProjectCard from "@/components/dashboard/ProjectCard";
 import PriorityDistribution from "@/components/dashboard/PriorityDistribution";
 import StatusDistribution from "@/components/dashboard/StatusDistribution";
 import HeatmapChart from "@/components/analytics/HeatmapChart";
+import BudgetOverview from "@/components/dashboard/BudgetOverview";
+import SpendingDistribution from "@/components/dashboard/SpendingDistribution";
 
 const DashboardPage = () => {
   const totalTasks = mockTasks.length;
@@ -18,13 +20,17 @@ const DashboardPage = () => {
       task.status !== "done"
   ).length;
   
+  // Calculate total budget and spent across all projects
+  const totalBudget = mockProjects.reduce((sum, project) => sum + project.budget, 0);
+  const totalSpent = mockProjects.reduce((sum, project) => sum + project.costSpent, 0);
+  
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Dashboard</h1>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         <StatsCard 
           title="Total Tasks"
           value={totalTasks}
@@ -45,20 +51,30 @@ const DashboardPage = () => {
           trendValue={overdueTasks > 0 ? `${overdueTasks} need attention` : "All on track"}
         />
         <StatsCard 
-          title="Upcoming Deadlines"
-          value={
-            mockTasks.filter(
-              task => 
-                new Date(task.deadline) > new Date() && 
-                new Date(task.deadline) < new Date(Date.now() + 86400000 * 7)
-            ).length
-          }
-          icon={Calendar}
+          title="Total Budget"
+          value={`$${totalBudget.toLocaleString()}`}
+          icon={DollarSign}
+        />
+        <StatsCard 
+          title="Spent"
+          value={`$${totalSpent.toLocaleString()}`}
+          icon={Activity}
+          trend={totalSpent / totalBudget > 0.9 ? "down" : "neutral"}
+          trendValue={`${Math.round((totalSpent / totalBudget) * 100)}% of budget used`}
         />
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card className="lg:col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <BudgetOverview projects={mockProjects} />
+        
+        <div className="space-y-6">
+          <SpendingDistribution projects={mockProjects} />
+          <StatusDistribution tasks={mockTasks} />
+        </div>
+      </div>
+      
+      <div className="grid grid-cols-1 gap-6">
+        <Card>
           <CardHeader>
             <CardTitle>Project Progress</CardTitle>
           </CardHeader>
@@ -70,14 +86,11 @@ const DashboardPage = () => {
             </div>
           </CardContent>
         </Card>
-        
-        <div className="space-y-6">
-          <PriorityDistribution tasks={mockTasks} />
-          <StatusDistribution tasks={mockTasks} />
-        </div>
       </div>
       
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <PriorityDistribution tasks={mockTasks} />
+        
         <Card>
           <CardHeader>
             <CardTitle>Productivity Analytics</CardTitle>

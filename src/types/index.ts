@@ -28,4 +28,6 @@ export interface Project {
   name: string;
   tasks: Task[];
   progress: number; // 0-100
+  budget: number;
+  costSpent: number;
 }
