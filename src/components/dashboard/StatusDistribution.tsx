@@ -37,9 +37,9 @@ const StatusDistribution = ({ tasks }: StatusDistributionProps) => {
       <CardContent>
         <div className="h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
+            <BarChart data={data} margin={{ top: 10, right: 30, left: 20, bottom: 30 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+              <XAxis dataKey="name" tick={{ fontSize: 12 }} tickMargin={10} />
               <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
               <Tooltip
                 formatter={(value) => [`${value} tasks`, "Count"]}
@@ -50,7 +50,7 @@ const StatusDistribution = ({ tasks }: StatusDistributionProps) => {
                   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
                 }}
               />
-              <Bar dataKey="count" radius={[4, 4, 0, 0]} fill="fill" />
+              <Bar dataKey="count" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

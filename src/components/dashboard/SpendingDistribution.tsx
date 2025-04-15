@@ -1,9 +1,12 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 import { Project } from "@/types";
+
 interface SpendingDistributionProps {
   projects: Project[];
 }
+
 const SpendingDistribution = ({
   projects
 }: SpendingDistributionProps) => {
@@ -29,33 +32,63 @@ const SpendingDistribution = ({
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
     const name = data[index].name;
-    const truncatedName = name.length > 12 ? `${name.slice(0, 10)}...` : name;
-    return <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" fontSize="0.7rem" fontWeight="bold">
+    // Shorter truncation to prevent text from going outside the chart
+    const truncatedName = name.length > 10 ? `${name.slice(0, 8)}...` : name;
+    
+    return (
+      <text 
+        x={x} 
+        y={y} 
+        fill="white" 
+        textAnchor={x > cx ? 'start' : 'end'} 
+        dominantBaseline="central" 
+        fontSize="0.7rem" 
+        fontWeight="bold"
+      >
         {`${truncatedName}: ${(percent * 100).toFixed(0)}%`}
-      </text>;
+      </text>
+    );
   };
-  return <Card className="h-full mx-0 my-[15px] py-0 px-[15px]">
+
+  return (
+    <Card className="h-full mx-0 my-[15px] py-0 px-[15px]">
       <CardHeader className="my-[14px]">
         <CardTitle className="text-lg text-center">Spending Distribution</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[280px]">
+        <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
-              <Pie data={data} cx="50%" cy="50%" innerRadius={70} outerRadius={100} paddingAngle={5} dataKey="value" label={renderCustomizedLabel} labelLine={false}>
-                {data.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
+              <Pie 
+                data={data} 
+                cx="50%" 
+                cy="50%" 
+                innerRadius={60} 
+                outerRadius={90} 
+                paddingAngle={5} 
+                dataKey="value" 
+                label={renderCustomizedLabel} 
+                labelLine={false}
+              >
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
               </Pie>
-              <Tooltip formatter={value => [`$${Number(value).toLocaleString()}`, "Spent"]} contentStyle={{
-              backgroundColor: "hsl(var(--background))",
-              border: "1px solid hsl(var(--border))",
-              borderRadius: "var(--radius)",
-              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
-            }} />
+              <Tooltip 
+                formatter={value => [`$${Number(value).toLocaleString()}`, "Spent"]} 
+                contentStyle={{
+                  backgroundColor: "hsl(var(--background))",
+                  border: "1px solid hsl(var(--border))",
+                  borderRadius: "var(--radius)",
+                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
+                }} 
+              />
             </PieChart>
           </ResponsiveContainer>
         </div>
       </CardContent>
-    </Card>;
+    </Card>
+  );
 };
 
 // Function to generate consistent colors based on string input
@@ -71,4 +104,5 @@ const getRandomColor = (str: string) => {
   const index = Math.abs(hash) % colors.length;
   return colors[index];
 };
+
 export default SpendingDistribution;

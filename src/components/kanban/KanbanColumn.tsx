@@ -6,7 +6,7 @@ interface KanbanColumnProps {
   column: Column;
   tasks: Task[];
   onDragStart: (task: Task) => void;
-  onDragOver: (e: React.DragOverEvent, columnId: string) => void;
+  onDragOver: (e: React.DragEvent<HTMLDivElement>, columnId: string) => void;
   onDrop: (columnId: string) => void;
 }
 

@@ -64,13 +64,13 @@ const DashboardPage = () => {
         />
       </div>
       
-      {/* Adjusted grid layout for better balance between BudgetOverview and SpendingDistribution */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <div className="lg:col-span-2">
+      {/* Modified grid layout for better spacing between BudgetOverview and SpendingDistribution */}
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div className="lg:col-span-3">
           <BudgetOverview projects={mockProjects} />
         </div>
         
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2">
           <SpendingDistribution projects={mockProjects} />
           <StatusDistribution tasks={mockTasks} />
         </div>
